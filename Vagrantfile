@@ -21,8 +21,8 @@ $postreboot = <<SCRIPT
 sudo apt-get install apparmor -y
 curl -sSL https://get.docker.com/ubuntu/ | sudo sh
 sudo su
-docker run -d -p 9200:9200 -p 9300:9300 dockerfile/elasticsearch
-docker run -d -e LOGSTASH_CONFIG_URL=https://raw.githubusercontent.com/ssugar/netmon-ELK/master/cookbooks/ss_logstash/files/default/logstash.conf -p 9292:9292 pblittle/docker-logstash
+docker run -d -name elasticsearch -p 9200:9200 -p 9300:9300 dockerfile/elasticsearch
+docker run -d -name logstash -e LOGSTASH_CONFIG_URL=https://gist.githubusercontent.com/pblittle/0b937485fa4a322ea9eb/raw/logstash_linked.conf -link elasticsearch:es -p 9292:9292 pblittle/docker-logstash
 SCRIPT
 
 
