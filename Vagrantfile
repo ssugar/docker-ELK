@@ -31,8 +31,15 @@ SCRIPT
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    #Set the virtual machine 'box' to use
    config.vm.box = "hashicorp/precise64"
-   #Set the vm name
+
+    #Set the vm name
    config.vm.define :dockerELK do |t|
+   end
+
+   config.vm.provider :hyperv do |v|
+	 v.vmname = "dockerELK"
+     v.memory = 1024
+	 v.cpus = 2
    end
    
    #run the pre-reboot script
